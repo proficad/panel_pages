@@ -119,7 +119,8 @@
     </Manifest>
     <PostBuildEvent>
       <Command>xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\CrashRpt1403.dll" "$(OutDir)"
-xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\CrashSender1403.exe"   "$(OutDir)"</Command>
+xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\CrashSender1403.exe"   "$(OutDir)"
+xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\zlib1.dll"   "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -182,7 +183,8 @@ xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\CrashSender1403.exe"   "$(Ou
     </ResourceCompile>
     <PostBuildEvent>
       <Command>xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\CrashRpt1403.dll" "$(OutDir)"
-xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\CrashSender1403.exe"   "$(OutDir)"</Command>
+xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\CrashSender1403.exe"   "$(OutDir)"
+xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\zlib1.dll"   "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

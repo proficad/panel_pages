@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 
 #include "CrashRptInit.h"
 #include <windows.h>
@@ -35,6 +35,16 @@ static std::wstring GetLocalAppDataPath()
     return ls_ret;
 }
 
+
+static std::wstring GetModuleDir()
+{
+    WCHAR l_path[MAX_PATH];
+    GetModuleFileNameW(nullptr, l_path, MAX_PATH);
+    std::wstring s(l_path);
+    size_t pos = s.find_last_of(L"\\/");
+    return (pos == std::wstring::npos) ? L"." : s.substr(0, pos);
+}
+
 bool CR_Install(const std::wstring& as_appName,
                 const std::wstring& as_appVersion,
                 const std::wstring& as_vendor)
@@ -46,23 +56,36 @@ bool CR_Install(const std::wstring& as_appName,
     gs_saveDir = ls_base + L"\\" + as_vendor + L"\\" + as_appName + L"\\crash_reports";
     fs::create_directories(gs_saveDir);
 
+
+    const std::wstring ls_lang = GetModuleDir() + L"\\crashrpt_lang.ini";
+    if (GetFileAttributesW(ls_lang.c_str()) == INVALID_FILE_ATTRIBUTES) {
+        OutputDebugStringW(L"[CrashRpt] lang ini NOT found at absolute path!\n");
+    }
+
+
     CR_INSTALL_INFOW l_info;
     memset(&l_info, 0, sizeof(l_info));
     l_info.cb = sizeof(l_info);
     l_info.pszAppName = as_appName.c_str();
     l_info.pszAppVersion = as_appVersion.c_str();
+    l_info.pszLangFilePath = ls_lang.c_str();   
 
     // If CrashSender.exe is next to the EXE, leaving pszCrashSenderPath = nullptr is OK.
     l_info.pszCrashSenderPath = nullptr;
 
     // Flags: all handlers, show UI, store zips locally, send queued on next launch.
-    l_info.dwFlags = CR_INST_ALL_POSSIBLE_HANDLERS
-                   | CR_INST_SHOW_ADDITIONAL_INFO_FIELDS
-                   | CR_INST_STORE_ZIP_ARCHIVES
-                   | CR_INST_SEND_QUEUED_REPORTS;
+    l_info.dwFlags =
+        CR_INST_ALL_POSSIBLE_HANDLERS |
+        CR_INST_DONT_SEND_REPORT |          // ❗ nutné s STORE_ZIP_ARCHIVES
+        CR_INST_STORE_ZIP_ARCHIVES |        // ukládej ZIPy
+        CR_INST_SHOW_ADDITIONAL_INFO_FIELDS; // volitelné
 
     // Save directory for ZIPs
+    gs_saveDir = GetLocalAppDataPath() + L"\\ProfiCAD Software\\ProfiCAD\\crash_reports";
+    std::filesystem::create_directories(gs_saveDir);
     l_info.pszErrorReportSaveDir = gs_saveDir.c_str();
+
+
 
     // Optional UI strings / privacy policy could be set here (left default for minimal sample)
     // l_info.pszPrivacyPolicyURL = L"https://example.com/privacy";
@@ -74,9 +97,15 @@ bool CR_Install(const std::wstring& as_appName,
     int li_res = crInstallW(&l_info);
     if (li_res != 0)
     {
-        // You can use crGetLastErrorMsgW to retrieve the error text.
+        WCHAR l_msg[1024] = {};
+        crGetLastErrorMsgW(l_msg, 1024);
+        OutputDebugStringW(L"[CrashRpt] crInstallW failed:\n");
+        OutputDebugStringW(l_msg);
+ 
         return false;
     }
+
+    //crEmulateCrash(CR_SEH_EXCEPTION);
 
     // Add a basic app info property visible in CrashRpt XML
     crAddPropertyW(L"Vendor", as_vendor.c_str());

@@ -11,6 +11,8 @@
 #include "QDlgListBox.h"
 #include "QDlgOwnerDraw.h"
 
+#include <CrashRpt.h>
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -22,6 +24,7 @@ IMPLEMENT_DYNCREATE(Cjust_BCGPView, CView)
 
 BEGIN_MESSAGE_MAP(Cjust_BCGPView, CView)
 	ON_WM_CONTEXTMENU()
+	ON_WM_LBUTTONDBLCLK()
 	// Standard printing commands
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &Cjust_BCGPView::OnFilePrintPreview)
@@ -78,6 +81,20 @@ void Cjust_BCGPView::OnSouborExportovat()
 {
 	int x = 0;
 	x++;
+}
+
+
+void Cjust_BCGPView::OnLButtonDblClk(UINT nFlags, CPoint point)
+{
+	
+
+	crEmulateCrash(CR_SEH_EXCEPTION);
+
+
+	int x = 50;
+	int y = 0;
+	int z = x / y;
+
 }
 
 
