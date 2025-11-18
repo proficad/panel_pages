@@ -43,7 +43,11 @@ protected:
 	afx_msg void OnSetFocus(CWnd* pOldWnd);
 	afx_msg LRESULT OnCommandClicked(WPARAM, LPARAM);
 	afx_msg LRESULT OnMenuItemSelected(WPARAM, LPARAM);
+	afx_msg LRESULT OnPropertyChanged(WPARAM, LPARAM lParam);
+
 	DECLARE_MESSAGE_MAP()
+
+
 
 	void InitPropList ();
 };

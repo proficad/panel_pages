@@ -35,6 +35,7 @@ BEGIN_MESSAGE_MAP(CBCGPPropBar, CBCGPDockingControlBar)
 	ON_WM_SETFOCUS()
 	ON_REGISTERED_MESSAGE(BCGM_PROPERTY_COMMAND_CLICKED, &CBCGPPropBar::OnCommandClicked)
 	ON_REGISTERED_MESSAGE(BCGM_PROPERTY_MENU_ITEM_SELECTED, &CBCGPPropBar::OnMenuItemSelected)
+	ON_REGISTERED_MESSAGE(BCGM_PROPERTY_CHANGED, OnPropertyChanged)
 END_MESSAGE_MAP()
 
 
@@ -73,6 +74,24 @@ int CBCGPPropBar::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	return 0;
 }
+
+
+
+LRESULT CBCGPPropBar::OnPropertyChanged(WPARAM, LPARAM lParam)
+{
+	CBCGPProp* pProp = (CBCGPProp*)lParam;
+	ASSERT_VALID(pProp);
+
+	const UINT id = pProp->GetID();
+
+	CString ls_value = pProp->GetValue();
+
+
+	return 0;
+}
+
+
+
 
 void CBCGPPropBar::OnSize(UINT nType, int cx, int cy)
 {
