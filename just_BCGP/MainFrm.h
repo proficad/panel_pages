@@ -77,6 +77,7 @@ protected:
 
 	afx_msg void OnComboZoom();
 	afx_msg void OnComboSnap();
+	afx_msg void OnReloadPanelPages();
 
 	afx_msg LRESULT OnDPIChanged(WPARAM wp, LPARAM lp);
 	DECLARE_MESSAGE_MAP()

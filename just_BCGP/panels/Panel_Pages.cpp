@@ -161,12 +161,6 @@ int Panel_Pages::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		m_list.SetFont(&m_listFontLarge);
 	}
 
-	m_list.AddString(_T("Page 1"));
-	m_list.AddString(_T("Page 2"));
-	m_list.AddString(_T("Page 3"));
-	m_list.AddString(_T("Page 4"));
-	
-
 
 	return 0;
 }
@@ -185,6 +179,8 @@ void Panel_Pages::OnDropped(NMHDR* pNMHDR, LRESULT*)
 	{
 		return;
 	}
+
+
 
 	QListBoxPages::LB_DROPPED* lp_dropped_info = (QListBoxPages::LB_DROPPED*)pNMHDR;
 
@@ -212,7 +208,7 @@ void Panel_Pages::OnDropped(NMHDR* pNMHDR, LRESULT*)
 
 void Panel_Pages::ReloadFromDoc(Cjust_BCGPDoc* pDoc)
 {
-	//TRACE(_T("reloading pages\n"));
+	OutputDebugString(_T("reloading pages\n"));
 	if (!pDoc) { return; }
 
 
@@ -221,7 +217,7 @@ void Panel_Pages::ReloadFromDoc(Cjust_BCGPDoc* pDoc)
 	m_list.SetRedraw(FALSE);
 
 	Clear();
-	//TRACE(_T("cleared\n"));
+	OutputDebugString(_T("cleared\n"));
 
 	if (pDoc)
 	{
@@ -229,6 +225,10 @@ void Panel_Pages::ReloadFromDoc(Cjust_BCGPDoc* pDoc)
 		for (size_t i = 0; i < pDoc->m_pagesPrivate.size(); ++i)
 		{
 			const QOnePage& page = pDoc->m_pagesPrivate[i];
+
+			CString ls_debug = _T("adding page " + page.Name + _T("\n"));
+			OutputDebugString(ls_debug);
+
 			const int index_added = m_list.AddString(page.Name);
 			//store the page ID in the item data
 			CString* pStr = new CString;
@@ -236,8 +236,7 @@ void Panel_Pages::ReloadFromDoc(Cjust_BCGPDoc* pDoc)
 			m_list.SetItemDataPtr(index_added, pStr);
 		}
 
-
-
+		OutputDebugString(_T("\n"));
 	}
 
 	m_list.SetRedraw(TRUE);

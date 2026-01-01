@@ -5,6 +5,8 @@
 #include "just_BCGP.h"
 
 #include "MainFrm.h"
+#include "just_BCGPDoc.h"
+#include "QUtilsMFC.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -20,6 +22,8 @@ BEGIN_MESSAGE_MAP(CMainFrame, CBCGPFrameWnd)
 	ON_COMMAND(ID_FILE_CLOSE, &CMainFrame::OnFileClose)
 	ON_REGISTERED_MESSAGE(BCGM_RESETTOOLBAR, &CMainFrame::OnToolbarReset)
 	ON_COMMAND(ID_TOOLBOX, &CMainFrame::OnToolBox)
+	ON_COMMAND(ID_VIEW_RELOADPANELPAGES, &CMainFrame::OnReloadPanelPages)
+
 	ON_MESSAGE(WM_DPICHANGED, &CMainFrame::OnDPIChanged)
 	ON_COMMAND(ID_COMBO_ZOOM, OnComboZoom)
 	ON_COMMAND(ID_COMBO_SNAP, OnComboSnap)
@@ -383,6 +387,14 @@ void CMainFrame::OnComboSnap()
 {
 	int i = 5;
 }
+
+
+void CMainFrame::OnReloadPanelPages()
+{
+	Cjust_BCGPDoc* pDoc = QUtilsMFC::GetActiveDoc();
+	ReloadPanelPages(pDoc);
+}
+
 
 void CMainFrame::Set_Theme_Dark_Or_Light(bool ab_dark)
 {

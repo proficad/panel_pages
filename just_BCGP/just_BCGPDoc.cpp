@@ -65,11 +65,11 @@ void Cjust_BCGPDoc::Move_Page(int ai_source, int ai_target)
 
 	if (ai_source < 0 || ai_source >= li_size) return;
 
-	// ai_target je INSERT POSITION: povol i "na konec"
+	// ai_target is INSERT POSITION: allow also "to the end"
 	if (ai_target < 0) ai_target = 0;
 	if (ai_target > li_size) ai_target = li_size;
 
-	// Pokud pouštíš na tu samou "mezeru", nic se nemění
+	// If you drop on the same "gap", nothing changes
 	if (ai_target == ai_source || ai_target == ai_source + 1)
 	{
 		m_currentPage = ai_source;
@@ -78,7 +78,7 @@ void Cjust_BCGPDoc::Move_Page(int ai_source, int ai_target)
 
 	if (ai_source < ai_target)
 	{
-		// příklad: 1 2 3 4 5, source=0, target=4  => 2 3 4 1 5
+		// example: 1 2 3 4 5, source=0, target=4  => 2 3 4 1 5
 		std::rotate(m_pagesPrivate.begin() + ai_source,
 			m_pagesPrivate.begin() + ai_source + 1,
 			m_pagesPrivate.begin() + ai_target);
@@ -87,7 +87,7 @@ void Cjust_BCGPDoc::Move_Page(int ai_source, int ai_target)
 	}
 	else
 	{
-		// příklad: 1 2 3 4 5, source=4, target=1  => 1 5 2 3 4
+		// example: 1 2 3 4 5, source=4, target=1  => 1 5 2 3 4
 		std::rotate(m_pagesPrivate.begin() + ai_target,
 			m_pagesPrivate.begin() + ai_source,
 			m_pagesPrivate.begin() + ai_source + 1);
