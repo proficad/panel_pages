@@ -13,6 +13,8 @@
 
 #include <CrashRpt.h>
 
+#include "MainFrm.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -87,14 +89,29 @@ void Cjust_BCGPView::OnSouborExportovat()
 void Cjust_BCGPView::OnLButtonDblClk(UINT nFlags, CPoint point)
 {
 	
-
+	/*
 	crEmulateCrash(CR_SEH_EXCEPTION);
 
 
 	int x = 50;
 	int y = 0;
 	int z = x / y;
+	*/
+}
 
+
+void Cjust_BCGPView::OnInitialUpdate()
+{
+	CView::OnInitialUpdate();
+
+	Cjust_BCGPDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	CMainFrame* pFrame = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+	if (pFrame)
+	{
+		pFrame->ReloadPanelPages(pDoc);
+	}
 }
 
 

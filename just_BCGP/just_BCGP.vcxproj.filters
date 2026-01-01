@@ -67,6 +67,15 @@
     <ClCompile Include="CrashRptInit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CProp_CElemRef.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QOnePage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QUtilsMFC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainFrm.h">
@@ -139,6 +148,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CrashRptInit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CProp_CElemRef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QOnePage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QUtilsMFC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

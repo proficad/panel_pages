@@ -1,5 +1,3 @@
-// Microsoft Visual C++ generated resource script.
-//
 #include "resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
@@ -531,6 +529,7 @@ BEGIN
     VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
     VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
     "A",            ID_VIEW_ATTRIBUTES,     VIRTKEY, CONTROL, NOINVERT
+    "E", ID_VIEW_OUTPUT,     VIRTKEY, CONTROL, NOINVERT
 END
 
 

@@ -218,6 +218,7 @@ xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\zlib1.dll"   "$(OutDir)"</Co
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CProp_CElemRef.h" />
     <ClInclude Include="CrashRptInit.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="OutputBar.h" />
@@ -233,7 +234,9 @@ xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\zlib1.dll"   "$(OutDir)"</Co
     <ClInclude Include="QDlgAttributes.h" />
     <ClInclude Include="QDlgListBox.h" />
     <ClInclude Include="QDlgOwnerDraw.h" />
+    <ClInclude Include="QOnePage.h" />
     <ClInclude Include="QStyleGridItem.h" />
+    <ClInclude Include="QUtilsMFC.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="just_BCGP.h" />
     <ClInclude Include="just_BCGPDoc.h" />
@@ -244,6 +247,7 @@ xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\zlib1.dll"   "$(OutDir)"</Co
     <ClInclude Include="ToolBox.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CProp_CElemRef.cpp" />
     <ClCompile Include="CrashRptInit.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="OutputBar.cpp" />
@@ -276,7 +280,9 @@ xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\zlib1.dll"   "$(OutDir)"</Co
     <ClCompile Include="QDlgAttributes.cpp" />
     <ClCompile Include="QDlgListBox.cpp" />
     <ClCompile Include="QDlgOwnerDraw.cpp" />
+    <ClCompile Include="QOnePage.cpp" />
     <ClCompile Include="QStyleGridItem.cpp" />
+    <ClCompile Include="QUtilsMFC.cpp" />
     <ClCompile Include="ToolBox.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

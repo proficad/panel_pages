@@ -138,7 +138,7 @@ bool CR_Install(const std::wstring& as_appName,
         | CR_INST_SEND_QUEUED_REPORTS; // if you later enable HTTP/SMTP
 
     // Force HTTP upload (disable email transports explicitly)
-    info.pszUrl = L"https://vecchiastrega.proficad.net/receive_crash.php";
+    info.pszUrl = L"https://vecchiastrega.proficad.net/receive_crash.php?token=CU9EqcfVFix7JJ4AU45";
 
     // 1) disable ALL transports first
     memset(info.uPriorities, 0, sizeof(info.uPriorities));

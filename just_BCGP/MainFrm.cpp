@@ -276,6 +276,15 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
+
+
+void CMainFrame::ReloadPanelPages(Cjust_BCGPDoc* pDoc)
+{
+	m_panel_pages.ReloadFromDoc(pDoc);
+}
+
+
+
 BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
 	if( !CBCGPFrameWnd::PreCreateWindow(cs) )

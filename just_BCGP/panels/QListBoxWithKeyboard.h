@@ -12,7 +12,7 @@ typedef struct tagLB_DROPPED {
 } LB_DROPPED;
 
 
-class QListBoxWithKeyboard : public CBCGPListBox
+class QListBoxWithKeyboard : public CBCGPDragListBox
 {
 	DECLARE_DYNAMIC(QListBoxWithKeyboard)
 
@@ -24,7 +24,7 @@ public:
 
 protected:
 	DECLARE_MESSAGE_MAP()
-	//virtual void Dropped(int nSrcIndex,	CPoint pt);
+	virtual void Dropped(int nSrcIndex,	CPoint pt) override;
 
 
 public:

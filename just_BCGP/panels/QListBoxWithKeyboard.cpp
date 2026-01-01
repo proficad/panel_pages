@@ -9,7 +9,7 @@
 
 // QListBoxWithKeyboard
 
-IMPLEMENT_DYNAMIC(QListBoxWithKeyboard, CBCGPListBox)
+IMPLEMENT_DYNAMIC(QListBoxWithKeyboard, CBCGPDragListBox)
 
 QListBoxWithKeyboard::QListBoxWithKeyboard()
 {
@@ -21,7 +21,7 @@ QListBoxWithKeyboard::~QListBoxWithKeyboard()
 }
 
 
-BEGIN_MESSAGE_MAP(QListBoxWithKeyboard, CBCGPListBox)
+BEGIN_MESSAGE_MAP(QListBoxWithKeyboard, CBCGPDragListBox)
 	ON_WM_KEYDOWN()
 //	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
@@ -101,7 +101,7 @@ void QListBoxWithKeyboard::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	CListBox::OnKeyDown(nChar, nRepCnt, nFlags);
 }
 
-/*
+
 void QListBoxWithKeyboard::Dropped( int nSrcIndex, CPoint pt )
 {
 	int li_what = nSrcIndex;
@@ -120,8 +120,7 @@ void QListBoxWithKeyboard::Dropped( int nSrcIndex, CPoint pt )
 		pWnd->SendMessage(WM_NOTIFY, 0, (LPARAM)&l_dropped);
 	}
 
-	CDragListBox::Dropped(nSrcIndex, pt);
+	CBCGPDragListBox::Dropped(nSrcIndex, pt);
 
 
 }
-*/

@@ -5,12 +5,41 @@
 #include "../just_BCGP.h"
 #include "Panel_Pages.h"
 
+#include "QListBoxPages.h"
+#include "../QUtilsMFC.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
+class Cjust_BCGPDoc;
 static char THIS_FILE[] = __FILE__;
 #endif
+
+namespace
+{
+	inline void FreeAllItemData(CListBox& list)
+	{
+		const int count = list.GetCount();
+		for (int i = 0; i < count; ++i)
+		{
+			auto p = static_cast<CString*>(list.GetItemDataPtr(i));
+			// Skip null and sentinel (-1) values
+			if (p != nullptr && p != reinterpret_cast<void*>(-1))
+			{
+				delete p;
+				list.SetItemDataPtr(i, nullptr);
+			}
+		}
+	}
+
+	inline bool IsValidWindowOnUIThread(HWND h)
+	{
+		// Only verify the window handle is valid; do not enforce thread match
+		return (h != nullptr) && ::IsWindow(h);
+	}
+}
+
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -19,6 +48,8 @@ static char THIS_FILE[] = __FILE__;
 BEGIN_MESSAGE_MAP(Panel_Pages, CBCGPDockingControlBar)
 	ON_WM_CREATE()
 	ON_WM_SIZE()
+	ON_NOTIFY(LISTBOX_DROPPED, 2025, OnDropped)
+
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -147,6 +178,80 @@ void Panel_Pages::OnSize(UINT nType, int cx, int cy)
 	// Tree control should cover a whole client area:
 	AdjustLayout();
 }
+
+void Panel_Pages::OnDropped(NMHDR* pNMHDR, LRESULT*)
+{
+	if (pNMHDR == nullptr)
+	{
+		return;
+	}
+
+	QListBoxPages::LB_DROPPED* lp_dropped_info = (QListBoxPages::LB_DROPPED*)pNMHDR;
+
+	const int iSource = lp_dropped_info->iSource;
+	const int iTarget = lp_dropped_info->iTarget;
+
+	if (iSource == iTarget || iSource < 0 || iTarget < 0)
+	{
+		return;
+	}
+
+	const int count = m_list.GetCount();
+	if (iSource >= count || iTarget >= count)
+	{
+		return;
+	}
+
+	Cjust_BCGPDoc* pDoc = dynamic_cast<Cjust_BCGPDoc*>(QUtilsMFC::GetActiveDoc());
+	if (pDoc)
+	{
+		pDoc->Move_Page(iSource, iTarget);
+		ReloadFromDoc(pDoc);
+	}
+}
+
+void Panel_Pages::ReloadFromDoc(Cjust_BCGPDoc* pDoc)
+{
+	//TRACE(_T("reloading pages\n"));
+	if (!pDoc) { return; }
+
+
+	//freeze redrawing and also switch off selecting items
+
+	m_list.SetRedraw(FALSE);
+
+	Clear();
+	//TRACE(_T("cleared\n"));
+
+	if (pDoc)
+	{
+		//for each item in pDoc->m_pagesPrivate
+		for (size_t i = 0; i < pDoc->m_pagesPrivate.size(); ++i)
+		{
+			const QOnePage& page = pDoc->m_pagesPrivate[i];
+			const int index_added = m_list.AddString(page.Name);
+			//store the page ID in the item data
+			CString* pStr = new CString;
+			*pStr = page.Name;
+			m_list.SetItemDataPtr(index_added, pStr);
+		}
+
+
+
+	}
+
+	m_list.SetRedraw(TRUE);
+
+}
+
+void Panel_Pages::Clear()
+{
+	m_list.SetRedraw(FALSE);
+	FreeAllItemData(m_list);
+	m_list.ResetContent();
+	m_list.SetRedraw(TRUE);
+}
+
 
 void Toolbar_Pages::AdjustLayout()
 {

@@ -4,6 +4,11 @@
 
 #pragma once
 #include "Panel_With_Preview.h"
+#include "QListBoxWithKeyboard.h"
+
+
+
+class Cjust_BCGPDoc;
 
 class Toolbar_Pages : public CBCGPToolBar
 {
@@ -30,7 +35,7 @@ public:
 // Attributes
 protected:
 	Toolbar_Pages m_wndToolBar;
-	CBCGPDragListBox m_list;
+	QListBoxWithKeyboard m_list;
 	CFont m_listFontLarge; // Member variable to hold the larger font
 
 	void Create_Toolbar();
@@ -43,12 +48,17 @@ public:
 // Implementation
 public:
 	virtual ~Panel_Pages();
+	void ReloadFromDoc(Cjust_BCGPDoc* pDoc);
 
 // Generated message map functions
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	DECLARE_MESSAGE_MAP()
+
+	void Clear();
+	void OnDropped(NMHDR* /*pNotifyStruct*/, LRESULT* /*result*/);
+
 };
 
 /////////////////////////////////////////////////////////////////////////////

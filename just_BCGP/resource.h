@@ -41,6 +41,7 @@
 #define IDC_LISTBOX                     1053
 #define IDC_LIST2                       1054
 #define IDC_EDIT1                       1055
+#define LISTBOX_DROPPED                 1256
 #define ID_VIEW_CUSTOMIZE               32770
 #define ID_VIEW_TOOLBARS                32771
 #define ID_DRAW_LINE                    32772

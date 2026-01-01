@@ -5,6 +5,8 @@
 #include "just_BCGP.h"
 #include "PropertiesViewBar.h"
 
+#include "CProp_CElemRef.h"
+
 #ifdef _DEBUG
 #undef THIS_FILE
 static char THIS_FILE[]=__FILE__;
@@ -139,8 +141,11 @@ void CBCGPPropBar::InitPropList ()
 	pProp->AllowEdit(FALSE);
 
 	pGroup1->AddSubItem (pProp);
-	pGroup1->AddSubItem (new CBCGPProp (_T("Caption"), (_variant_t) _T("About BCGProTest"),
-		_T("Specifies the text that will be displayed in the dialog's title bar")));
+
+	CProp_CElemRef* pitem_caption = new CProp_CElemRef(_T("Caption"), (_variant_t)_T("About BCGProTest"), 10050);
+	pitem_caption->SetID(10050);
+	pGroup1->AddSubItem (pitem_caption);
+
 
 	m_wndPropList.AddProperty (pGroup1);
 

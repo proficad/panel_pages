@@ -24,7 +24,7 @@ public:
 
 // Operations
 public:
-	
+	void ReloadPanelPages(Cjust_BCGPDoc* pDoc);
 
 
 // Overrides
