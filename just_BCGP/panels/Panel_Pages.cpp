@@ -16,6 +16,13 @@ class Cjust_BCGPDoc;
 static char THIS_FILE[] = __FILE__;
 #endif
 
+
+#ifndef WM_APP_RELOAD_PAGES
+#define WM_APP_RELOAD_PAGES (WM_APP + 15)
+#endif
+
+
+
 namespace
 {
 	inline void FreeAllItemData(CListBox& list)
@@ -49,7 +56,7 @@ BEGIN_MESSAGE_MAP(Panel_Pages, CBCGPDockingControlBar)
 	ON_WM_CREATE()
 	ON_WM_SIZE()
 	ON_NOTIFY(LISTBOX_DROPPED, 2025, OnDropped)
-
+	ON_MESSAGE(WM_APP_RELOAD_PAGES, TryReloadFromDoc)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -173,6 +180,17 @@ void Panel_Pages::OnSize(UINT nType, int cx, int cy)
 	AdjustLayout();
 }
 
+LRESULT Panel_Pages::TryReloadFromDoc(WPARAM /*wParam*/, LPARAM /*lParam*/)
+{
+	// Get the active document
+	Cjust_BCGPDoc* pDoc = dynamic_cast<Cjust_BCGPDoc*>(QUtilsMFC::GetActiveDoc());
+	if (pDoc)
+	{
+		ReloadFromDoc(pDoc);
+	}
+	return 0;
+}
+
 void Panel_Pages::OnDropped(NMHDR* pNMHDR, LRESULT*)
 {
 	if (pNMHDR == nullptr)
@@ -202,7 +220,9 @@ void Panel_Pages::OnDropped(NMHDR* pNMHDR, LRESULT*)
 	if (pDoc)
 	{
 		pDoc->Move_Page(iSource, iTarget);
-		ReloadFromDoc(pDoc);
+
+		// post message to self to reload pages, pass pointer to the doc
+		PostMessage(WM_APP_RELOAD_PAGES, reinterpret_cast<WPARAM>(pDoc), 0);
 	}
 }
 
