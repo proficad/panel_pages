@@ -10,8 +10,7 @@
 #include "Page_Listbox.h"
 
 
-#include "CrashRpt.h"
-#include "CrashRptInit.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -159,7 +158,7 @@ BOOL Cjust_BCGPApp::InitInstance()
 	//  In an SDI app, this should occur after ProcessShellCommand
 
 
-	CR_Install(L"ProfiCAD", L"13.2.0", L"ProfiCAD Software");
+
 
 	return TRUE;
 }
@@ -168,7 +167,7 @@ BOOL Cjust_BCGPApp::InitInstance()
 
 int Cjust_BCGPApp::ExitInstance()
 {
-	CR_Uninstall();
+
 	return CBCGPWinApp::ExitInstance();
 }
 

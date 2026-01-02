@@ -11,7 +11,7 @@
 #include "QDlgListBox.h"
 #include "QDlgOwnerDraw.h"
 
-#include <CrashRpt.h>
+
 
 #include "MainFrm.h"
 

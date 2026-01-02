@@ -22,7 +22,7 @@
     <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>{5428D150-D7B5-4673-8B51-F7184D3FA963}</ProjectGuid>
     <RootNamespace>just_BCGP</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <Keyword>MFCProj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -101,8 +101,9 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>d:\projects\CrashRpt_v.1.4.3_r1645\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>d:\projects\CrashRpt_v.1.4.3_r1645\lib\CrashRpt1403.lib;dbghelp.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>dbghelp.lib</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -118,9 +119,8 @@
       <AdditionalManifestFiles>just_BCGP.manifest</AdditionalManifestFiles>
     </Manifest>
     <PostBuildEvent>
-      <Command>xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\CrashRpt1403.dll" "$(OutDir)"
-xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\CrashSender1403.exe"   "$(OutDir)"
-xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\zlib1.dll"   "$(OutDir)"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -168,8 +168,9 @@ xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\zlib1.dll"   "$(OutDir)"</Co
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>d:\projects\CrashRpt_v.1.4.3_r1645\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>d:\projects\CrashRpt_v.1.4.3_r1645\lib\CrashRpt1403.lib;dbghelp.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>dbghelp.lib</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -182,9 +183,8 @@ xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\zlib1.dll"   "$(OutDir)"</Co
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <PostBuildEvent>
-      <Command>xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\CrashRpt1403.dll" "$(OutDir)"
-xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\CrashSender1403.exe"   "$(OutDir)"
-xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\zlib1.dll"   "$(OutDir)"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -219,7 +219,6 @@ xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\zlib1.dll"   "$(OutDir)"</Co
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CProp_CElemRef.h" />
-    <ClInclude Include="CrashRptInit.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="OutputBar.h" />
     <ClInclude Include="Page_Listbox.h" />
@@ -248,29 +247,38 @@ xcopy /Y /D "D:\projects\CrashRpt_v.1.4.3_r1645\bin\zlib1.dll"   "$(OutDir)"</Co
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CProp_CElemRef.cpp" />
-    <ClCompile Include="CrashRptInit.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="OutputBar.cpp" />
     <ClCompile Include="Page_Listbox.cpp" />
     <ClCompile Include="panels\Panel_Layers.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="panels\Panel_Pages.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="panels\Panel_Symbols.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="panels\Panel_With_Preview.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="panels\QListBoxPages.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="panels\QListBoxWithKeyboard.cpp" />
     <ClCompile Include="PropertiesViewBar.cpp" />

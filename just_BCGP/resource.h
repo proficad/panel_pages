@@ -104,6 +104,7 @@
 #define ID_VIEW_O                       32889
 #define ID_VIEW_OWNER_DRAW              32890
 #define ID_VIEW_RELOADPANELPAGES        32891
+#define ID_VIEW_RELOADPANELPAGES32892   32892
 #define ID_DRAW_CHORD                   32907
 #define ID_DRAW_PIE                     32908
 #define ID_DRAW_ARC_RECT                32909
@@ -117,7 +118,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        186
-#define _APS_NEXT_COMMAND_VALUE         32892
+#define _APS_NEXT_COMMAND_VALUE         32893
 #define _APS_NEXT_CONTROL_VALUE         1056
 #define _APS_NEXT_SYMED_VALUE           128
 #endif
